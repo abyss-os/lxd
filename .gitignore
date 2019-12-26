@@ -1,0 +1,7 @@
+# generator
+/esh
+
+# artifacts
+/abyss.tar.gz
+/metadata.yaml
+/rootfs
