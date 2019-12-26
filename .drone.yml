@@ -12,7 +12,7 @@ steps:
   settings:
     path_style: true
     source: "abyss.tar.gz"
-    target: "/lxd/abyss.tar.gz"
+    target: "/lxd"
     bucket:
       from_secret: s3_id
     access_key:
