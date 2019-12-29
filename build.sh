@@ -8,6 +8,7 @@ rm -rf esh \
     rootfs
 
 ABYSS_CORE=https://mirror.getabyss.com/abyss/core
+ABYSS_DEV=https://mirror.getabyss.com/abyss/devel
 
 # get prereqs
 apk add bsdtar
@@ -28,6 +29,7 @@ apka() {
 apka filesystem
 apka abyss-keyring apk-tools busybox ca-certificates
 echo "$ABYSS_CORE" > rootfs/etc/apk/repositories
+echo "$ABYSS_DEV" >> rootfs/etc/apk/repositories
 
 # prep for chroot
 cp /etc/resolv.conf rootfs/etc/
