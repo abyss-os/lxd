@@ -8,19 +8,9 @@ steps:
   - /bin/sh ./build.sh
 
 - name: deploy image
-  image: plugins/s3
-  settings:
-    path_style: true
-    source: "abyss.tar.gz"
-    target: "/lxd"
-    bucket:
-      from_secret: s3_id
-    access_key:
-      from_secret: s3_id
-    secret_key:
-      from_secret: s3_key
-    endpoint:
-      from_secret: s3_endpoint
+  image: minio/mc
+  commands:
+  - /bin/sh ./upload.sh mc
   when:
     branch:
     - master
