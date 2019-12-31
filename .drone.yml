@@ -11,6 +11,13 @@ steps:
   image: minio/mc
   commands:
   - /bin/sh ./upload.sh mc
+  environment:
+    s3_id:
+      from_secret: s3_id
+    s3_key:
+      from_secret: s3_key
+    s3_endpoint:
+      from_secret: s3_endpoint
   when:
     branch:
     - master
