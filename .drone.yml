@@ -1,13 +1,14 @@
 kind: pipeline
-name: default
+type: docker
+name: x86_64
 
 steps:
-- name: build image
-  image: abyssos/abyss
+- name: build
+  image: abyssos/abyss:latest
   commands:
   - /bin/sh ./build.sh
 
-- name: deploy image
+- name: push
   image: minio/mc
   commands:
   - /bin/sh ./upload.sh mc
@@ -23,3 +24,32 @@ steps:
   when:
     branch:
     - master
+
+---
+kind: pipeline
+type: docker
+name: aarch64
+
+steps:
+- name: build
+  image: abyssos/abyss:latest
+  commands:
+  - /bin/sh ./build.sh
+
+- name: push
+  image: minio/mc
+  commands:
+  - /bin/sh ./upload.sh mc
+  environment:
+    s3_id:
+      from_secret: s3_id
+    s3_key:
+      from_secret: s3_key
+    s3_endpoint:
+      from_secret: s3_endpoint
+    MC_HOST_master:
+      from_secret: MC_HOST_master
+  when:
+    branch:
+    - master
+
