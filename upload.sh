@@ -9,3 +9,4 @@ MCLI=mcli
 
 export MC_HOST_target="https://$s3_id:$s3_key@$s3_endpoint"
 $MCLI cp abyss.tar.gz "target/$s3_id/lxd/"
+$MCLI cp abyss.tar.gz "master/abyss-ci/lxd-snap-$(date +%Y%m%d).tgz"
