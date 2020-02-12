@@ -5,4 +5,4 @@ case $DRONE_STAGE_ARCH in
         *) echo "unknown arch" ; exit 1;;
 esac
 
-mcli cp abyss.tar.gz "master/abyss-ci/lxd/snap-${buildarch}-$(date +%Y%m%d).tgz"
+mcli cp --attr arch="${buildarch}"\;stamp="$(date +%Y%m%d)" abyss.tar.gz "master/abyss-ci/lxd/snap-${buildarch}-$(date +%Y%m%d).tgz"

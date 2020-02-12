@@ -39,7 +39,6 @@ crun() {
 }
 # enable services
 crun ln -s /etc/init.d/getty /etc/init.d/getty.console
-crun rc-update add bootmisc boot
 crun rc-update add getty.console default
 crun rc-update add dhcpcd default
 crun rc-update add loopback sysinit
