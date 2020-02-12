@@ -26,8 +26,7 @@ chmod +x esh
 apka() {
     apk add -X "$ABYSS_CORE" --no-cache --allow-untrusted --initdb --root rootfs "$@"
 }
-apka filesystem
-apka abyss-keyring apk-tools busybox ca-certificates
+apka abyss-base
 echo "$ABYSS_CORE" > rootfs/etc/apk/repositories
 echo "$ABYSS_DEV" >> rootfs/etc/apk/repositories
 
@@ -38,15 +37,13 @@ cp /etc/resolv.conf rootfs/etc/
 crun() {
     chroot rootfs "$@"
 }
-crun /usr/bin/busybox --install -s /usr/bin
-crun apk fix --no-cache
-# basic setup
-crun apk add --no-cache dhcpcd openrc util-linux
-crun ln -s openrc-init /sbin/init
 # enable services
 crun ln -s /etc/init.d/agetty /etc/init.d/agetty.console
-crun rc-update add agetty.console default
-crun rc-update add dhcpcd         default
+crun rc-update add bootmisc boot
+crun rc-update add getty.console default
+crun rc-update add dhcpcd default
+crun rc-update add loopback sysinit
+
 # NO, NOT ALLOWED
 crun sed -i 's/^persistent/#persistent/' /etc/dhcpcd.conf
 
