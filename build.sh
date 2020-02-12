@@ -38,7 +38,7 @@ crun() {
     chroot rootfs "$@"
 }
 # enable services
-crun ln -s /etc/init.d/agetty /etc/init.d/agetty.console
+crun ln -s /etc/init.d/getty /etc/init.d/getty.console
 crun rc-update add bootmisc boot
 crun rc-update add getty.console default
 crun rc-update add dhcpcd default
