@@ -11,7 +11,7 @@ ABYSS_CORE=https://mirror.getabyss.com/abyss/core
 ABYSS_DEV=https://mirror.getabyss.com/abyss/devel
 
 # get prereqs
-apk add bsdtar
+apk add bsdtar squashfs-tools
 
 # get esh, for metadata generation
 wget https://raw.githubusercontent.com/jirutka/esh/v0.3.0/esh \
@@ -48,3 +48,7 @@ crun sed -i 's/^persistent/#persistent/' /etc/dhcpcd.conf
 
 # create unified tarball
 bsdtar -caf abyss.tar.gz rootfs metadata.yaml
+
+# create separate images + squashfs
+bsdtar -caf lxd.tar.gz metadata.yaml
+mksquashfs rootfs rootfs.squashfs -all-root

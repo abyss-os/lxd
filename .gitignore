@@ -3,5 +3,7 @@
 
 # artifacts
 /abyss.tar.gz
+/lxd.tar.gz
 /metadata.yaml
 /rootfs
+/rootfs.squashfs
