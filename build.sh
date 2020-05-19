@@ -7,8 +7,8 @@ rm -rf esh \
     metadata.yaml \
     rootfs
 
-ABYSS_CORE=https://mirror.getabyss.com/abyss/core
-ABYSS_DEV=https://mirror.getabyss.com/abyss/devel
+ABYSS_CORE=https://mirror.abyss.run/abyss/core
+ABYSS_DEV=https://mirror.abyss.run/abyss/devel
 
 # get prereqs
 apk add bsdtar squashfs-tools
