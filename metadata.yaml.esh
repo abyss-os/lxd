@@ -4,4 +4,4 @@ properties:
   description: Abyss OS <% apk --print-arch -%> snapshot <% date -I -%>
   os: Abyss
   release: rolling
-
+expiry: <% expr $(date +%s) + 691200 -%>
