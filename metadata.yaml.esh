@@ -1,7 +1,7 @@
 architecture: <% apk --print-arch -%>
 creation_date: <% date +%s -%>
 properties:
-  description: Abyss OS Nightly Image <% date -I -%>
+  description: Abyss OS <% apk --print-arch -%> snapshot <% date -I -%>
   os: Abyss
-  release: nightly
+  release: rolling
 
