@@ -89,12 +89,10 @@ platform:
 
 steps:
 - name: build
-  image: abyssos/abyss:latest
   commands:
   - /bin/sh ./build.sh
 
 - name: push
-  image: abyssos/abyss:latest
   commands:
   - apk add minio-client
   - /bin/sh ./upload.sh
