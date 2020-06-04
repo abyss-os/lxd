@@ -51,3 +51,56 @@ steps:
     branch:
     - master
 
+---
+kind: pipeline
+type: docker
+name: ppc64le
+
+platform:
+  os: linux
+  arch: ppc64le
+
+steps:
+- name: build
+  image: abyssos/abyss:latest
+  commands:
+  - /bin/sh ./build.sh
+
+- name: push
+  image: abyssos/abyss:latest
+  commands:
+  - apk add minio-client
+  - /bin/sh ./upload.sh
+  environment:
+    MC_HOST_master:
+      from_secret: MC_HOST_master
+  when:
+    branch:
+    - master
+
+---
+kind: pipeline
+type: exec
+name: mips64
+
+platform:
+  os: linux
+  arch: mips64
+
+steps:
+- name: build
+  image: abyssos/abyss:latest
+  commands:
+  - /bin/sh ./build.sh
+
+- name: push
+  image: abyssos/abyss:latest
+  commands:
+  - apk add minio-client
+  - /bin/sh ./upload.sh
+  environment:
+    MC_HOST_master:
+      from_secret: MC_HOST_master
+  when:
+    branch:
+    - master
