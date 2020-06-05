@@ -1,7 +1,7 @@
 architecture: <% apk --print-arch -%>
 creation_date: <% date +%s -%>
-expiry_date: <% date -Iseconds -u -d 192:$(date +%M:%S) -%>
+expiry_date: <% expr $(date +%s) + 691200 -%>
 properties:
-  description: Abyss OS <% apk --print-arch -%> snapshot <% date -I -%>
+  description: Abyss OS snapshot <% date -I -%>
   os: Abyss
   release: rolling
