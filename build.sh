@@ -61,7 +61,7 @@ bsdtar -caf latest.tar.gz rootfs metadata.yaml
 #bsdtar -caf latest.tar.gz metadata.yaml
 #mksquashfs rootfs rootfs.squashfs -all-root
 
-rm -vf latest.tar.gz metadata.yaml rootfs.squashfs
+rm -vf metadata.yaml
 
 # now make dev
 crun apk add abyss-base-dev
