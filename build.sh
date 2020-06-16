@@ -51,8 +51,8 @@ crun sed -i 's/^persistent/#persistent/' /etc/dhcpcd.conf
 bsdtar -caf latest.tar.gz rootfs metadata.yaml
 
 # create separate images + squashfs
-bsdtar -caf latest.tar.gz metadata.yaml
-mksquashfs rootfs rootfs.squashfs -all-root
+#bsdtar -caf latest.tar.gz metadata.yaml
+#mksquashfs rootfs rootfs.squashfs -all-root
 
 # now make dev
 crun apk add abyss-base-dev
@@ -63,6 +63,8 @@ case "$ARCH" in
 esac
 crun toolchain $cc $binutils
 crun adduser root abuild
+
+./esh -o metadata.yaml metadata.dev.yaml.esh
 
 # create unified tarball
 bsdtar -caf dev.tar.gz rootfs metadata.yaml
