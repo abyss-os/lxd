@@ -7,6 +7,7 @@ rm -rf esh \
     metadata.yaml \
     rootfs
 
+ARCH=$(apk --print-arch)
 ABYSS_CORE=https://mirror.abyss.run/abyss/core
 ABYSS_DEV=https://mirror.abyss.run/abyss/devel
 
@@ -47,8 +48,21 @@ crun rc-update add loopback sysinit
 crun sed -i 's/^persistent/#persistent/' /etc/dhcpcd.conf
 
 # create unified tarball
-bsdtar -caf abyss.tar.gz rootfs metadata.yaml
+bsdtar -caf latest.tar.gz rootfs metadata.yaml
 
 # create separate images + squashfs
-bsdtar -caf lxd.tar.gz metadata.yaml
+bsdtar -caf latest.tar.gz metadata.yaml
 mksquashfs rootfs rootfs.squashfs -all-root
+
+# now make dev
+crun apk add abyss-base-dev
+crun ln -s /usr/bin/gmake /usr/bin/make
+case "$ARCH" in
+	mips64*|riscv64) cc=none binutils=gnu;;
+	*)	cc=none binutils=llvm;;
+esac
+crun toolchain $cc $binutils
+crun adduser root abuild
+
+# create unified tarball
+bsdtar -caf dev.tar.gz rootfs metadata.yaml
