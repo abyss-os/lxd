@@ -57,7 +57,6 @@ crun sed -i 's/^persistent/#persistent/' /etc/dhcpcd.conf
 echo "latest.tar.gz"
 bsdtar -caf latest.tar.gz rootfs metadata.yaml
 
-stat latest.tar.gz
 # create separate images + squashfs
 #bsdtar -caf latest.tar.gz metadata.yaml
 #mksquashfs rootfs rootfs.squashfs -all-root
@@ -75,4 +74,3 @@ crun adduser root abuild
 # create unified tarball
 echo "dev.tar.gz"
 bsdtar -caf dev.tar.gz rootfs metadata.yaml
-stat latest.tar.gz
